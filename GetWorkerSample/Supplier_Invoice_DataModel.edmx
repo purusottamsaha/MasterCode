@@ -1,0 +1,313 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="WorkDay_ResourseManagementModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'WorkDay_ResourseManagement.dbo.Company' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Company">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Company_ID" Type="varchar" MaxLength="50" />
+          <Property Name="Company_Name" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Invoice_Delivery_Log">
+          <Key>
+            <PropertyRef Name="Log_ID" />
+          </Key>
+          <Property Name="Log_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="File_Name" Type="varchar" MaxLength="20" />
+          <Property Name="PO_Or_Non_PO" Type="varchar" MaxLength="20" />
+          <Property Name="Supplier_Name" Type="varchar" MaxLength="30" />
+          <Property Name="Supplier_ID" Type="varchar" MaxLength="30" />
+          <Property Name="Sender_Email" Type="varchar" MaxLength="30" />
+          <Property Name="Processing_Time" Type="datetime" />
+          <Property Name="Invoice_Number" Type="varchar" MaxLength="30" />
+          <Property Name="Invoice_Date" Type="datetime" />
+          <Property Name="Perentage" Type="varchar" MaxLength="30" />
+          <Property Name="Amount" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Bill_To" Type="varchar" MaxLength="30" />
+          <Property Name="Status" Type="varchar" MaxLength="10" />
+          <Property Name="Error_Detail" Type="varchar(max)" />
+          <Property Name="WorkDay_ID" Type="varchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="NonPO_Line_Details">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Supplier_ID" Type="nvarchar" MaxLength="20" />
+          <Property Name="Line_Seq_No" Type="int" />
+          <Property Name="Company" Type="varchar" MaxLength="20" />
+          <Property Name="Item_Desription" Type="varchar" MaxLength="50" />
+          <Property Name="Spend_Catagories" Type="varchar" MaxLength="20" />
+          <Property Name="Cost_Center" Type="varchar" MaxLength="20" />
+          <Property Name="Project" Type="varchar" MaxLength="20" />
+          <Property Name="Custom_Org" Type="varchar" MaxLength="20" />
+          <Property Name="Tax_Type" Type="varchar" MaxLength="20" />
+          <Property Name="Percetage" Type="int" />
+          <Property Name="Employee" Type="varchar" MaxLength="20" />
+          <Property Name="Account" Type="int" />
+          <Property Name="Created_By" Type="varchar" MaxLength="20" />
+          <Property Name="Created_On" Type="datetime" />
+          <Property Name="Updated_on" Type="datetime" />
+          <Property Name="Uodated_By" Type="varchar" MaxLength="20" />
+          <Property Name="Is_Active" Type="bit" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'WorkDay_ResourseManagement.dbo.NonPO_Line_Details_Default' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="NonPO_Line_Details_Default">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Company_ID" Type="varchar" MaxLength="50" />
+          <Property Name="Cost_Center" Type="varchar" MaxLength="50" />
+          <Property Name="Spend_Category" Type="varchar" MaxLength="50" />
+          <Property Name="Custom_Org" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'WorkDay_ResourseManagement.dbo.PO_Details' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="PO_Details">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Supllier_ID" Type="varchar" MaxLength="20" />
+          <Property Name="PO_ID" Type="varchar" MaxLength="20" />
+          <Property Name="PO_Line_Seq" Type="int" />
+          <Property Name="Po_Amount" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Cost_Centre" Type="varchar" MaxLength="10" />
+          <Property Name="Spend_Catagory" Type="varchar" MaxLength="10" />
+          <Property Name="Custom_Org" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityContainer Name="WorkDay_ResourseManagementModelStoreContainer">
+          <EntitySet Name="Invoice_Delivery_Log" EntityType="Self.Invoice_Delivery_Log" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NonPO_Line_Details" EntityType="Self.NonPO_Line_Details" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Company" EntityType="Self.Company" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Company].[ID] AS [ID], 
+    [Company].[Company_ID] AS [Company_ID], 
+    [Company].[Company_Name] AS [Company_Name]
+    FROM [dbo].[Company] AS [Company]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="NonPO_Line_Details_Default" EntityType="Self.NonPO_Line_Details_Default" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [NonPO_Line_Details_Default].[ID] AS [ID], 
+    [NonPO_Line_Details_Default].[Company_ID] AS [Company_ID], 
+    [NonPO_Line_Details_Default].[Cost_Center] AS [Cost_Center], 
+    [NonPO_Line_Details_Default].[Spend_Category] AS [Spend_Category], 
+    [NonPO_Line_Details_Default].[Custom_Org] AS [Custom_Org]
+    FROM [dbo].[NonPO_Line_Details_Default] AS [NonPO_Line_Details_Default]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="PO_Details" EntityType="Self.PO_Details" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [PO_Details].[ID] AS [ID], 
+    [PO_Details].[Supllier_ID] AS [Supllier_ID], 
+    [PO_Details].[PO_ID] AS [PO_ID], 
+    [PO_Details].[PO_Line_Seq] AS [PO_Line_Seq], 
+    [PO_Details].[Po_Amount] AS [Po_Amount], 
+    [PO_Details].[Cost_Centre] AS [Cost_Centre], 
+    [PO_Details].[Spend_Catagory] AS [Spend_Catagory], 
+    [PO_Details].[Custom_Org] AS [Custom_Org]
+    FROM [dbo].[PO_Details] AS [PO_Details]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="WorkDay_ResourseManagementModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="NonPO_Line_Details">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Supplier_ID" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Line_Seq_No" Type="Int32" />
+          <Property Name="Company" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Item_Desription" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Spend_Catagories" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Cost_Center" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Project" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Custom_Org" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Tax_Type" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Percetage" Type="Int32" />
+          <Property Name="Employee" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Account" Type="Int32" />
+          <Property Name="Created_By" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Created_On" Type="DateTime" Precision="3" />
+          <Property Name="Updated_on" Type="DateTime" Precision="3" />
+          <Property Name="Uodated_By" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Is_Active" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="Company">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Company_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Company_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="NonPO_Line_Details_Default">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Company_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Cost_Center" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Spend_Category" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Custom_Org" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="PO_Details">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Supllier_ID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="PO_ID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="PO_Line_Seq" Type="Int32" />
+          <Property Name="Po_Amount" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Cost_Centre" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Spend_Catagory" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Custom_Org" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityContainer Name="WorkDay_Resourse_ManagementEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="NonPO_Line_Details" EntityType="Self.NonPO_Line_Details" />
+          <EntitySet Name="Companies" EntityType="Self.Company" />
+          <EntitySet Name="NonPO_Line_Details_Default" EntityType="Self.NonPO_Line_Details_Default" />
+          <EntitySet Name="PO_Details" EntityType="Self.PO_Details" />
+          <EntitySet Name="Invoice_Delivery_Log" EntityType="WorkDay_ResourseManagementModel.Invoice_Delivery_Log" />
+        </EntityContainer>
+        <EntityType Name="Invoice_Delivery_Log">
+          <Key>
+            <PropertyRef Name="Log_ID" />
+          </Key>
+          <Property Name="Log_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="File_Name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="PO_Or_Non_PO" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Supplier_Name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Supplier_ID" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Sender_Email" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Processing_Time" Type="DateTime" Precision="3" />
+          <Property Name="Invoice_Number" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Invoice_Date" Type="DateTime" Precision="3" />
+          <Property Name="Perentage" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Amount" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Bill_To" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Status" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Error_Detail" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="WorkDay_ID" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="WorkDay_ResourseManagementModelStoreContainer" CdmEntityContainer="WorkDay_Resourse_ManagementEntities1">
+          <EntitySetMapping Name="NonPO_Line_Details">
+            <EntityTypeMapping TypeName="WorkDay_ResourseManagementModel.NonPO_Line_Details">
+              <MappingFragment StoreEntitySet="NonPO_Line_Details">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Supplier_ID" ColumnName="Supplier_ID" />
+                <ScalarProperty Name="Line_Seq_No" ColumnName="Line_Seq_No" />
+                <ScalarProperty Name="Company" ColumnName="Company" />
+                <ScalarProperty Name="Item_Desription" ColumnName="Item_Desription" />
+                <ScalarProperty Name="Spend_Catagories" ColumnName="Spend_Catagories" />
+                <ScalarProperty Name="Cost_Center" ColumnName="Cost_Center" />
+                <ScalarProperty Name="Project" ColumnName="Project" />
+                <ScalarProperty Name="Custom_Org" ColumnName="Custom_Org" />
+                <ScalarProperty Name="Tax_Type" ColumnName="Tax_Type" />
+                <ScalarProperty Name="Percetage" ColumnName="Percetage" />
+                <ScalarProperty Name="Employee" ColumnName="Employee" />
+                <ScalarProperty Name="Account" ColumnName="Account" />
+                <ScalarProperty Name="Created_By" ColumnName="Created_By" />
+                <ScalarProperty Name="Created_On" ColumnName="Created_On" />
+                <ScalarProperty Name="Updated_on" ColumnName="Updated_on" />
+                <ScalarProperty Name="Uodated_By" ColumnName="Uodated_By" />
+                <ScalarProperty Name="Is_Active" ColumnName="Is_Active" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Companies">
+            <EntityTypeMapping TypeName="WorkDay_ResourseManagementModel.Company">
+              <MappingFragment StoreEntitySet="Company">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Company_ID" ColumnName="Company_ID" />
+                <ScalarProperty Name="Company_Name" ColumnName="Company_Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NonPO_Line_Details_Default">
+            <EntityTypeMapping TypeName="WorkDay_ResourseManagementModel.NonPO_Line_Details_Default">
+              <MappingFragment StoreEntitySet="NonPO_Line_Details_Default">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Company_ID" ColumnName="Company_ID" />
+                <ScalarProperty Name="Cost_Center" ColumnName="Cost_Center" />
+                <ScalarProperty Name="Spend_Category" ColumnName="Spend_Category" />
+                <ScalarProperty Name="Custom_Org" ColumnName="Custom_Org" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PO_Details">
+            <EntityTypeMapping TypeName="WorkDay_ResourseManagementModel.PO_Details">
+              <MappingFragment StoreEntitySet="PO_Details">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Supllier_ID" ColumnName="Supllier_ID" />
+                <ScalarProperty Name="PO_ID" ColumnName="PO_ID" />
+                <ScalarProperty Name="PO_Line_Seq" ColumnName="PO_Line_Seq" />
+                <ScalarProperty Name="Po_Amount" ColumnName="Po_Amount" />
+                <ScalarProperty Name="Cost_Centre" ColumnName="Cost_Centre" />
+                <ScalarProperty Name="Spend_Catagory" ColumnName="Spend_Catagory" />
+                <ScalarProperty Name="Custom_Org" ColumnName="Custom_Org" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Invoice_Delivery_Log">
+            <EntityTypeMapping TypeName="WorkDay_ResourseManagementModel.Invoice_Delivery_Log">
+              <MappingFragment StoreEntitySet="Invoice_Delivery_Log">
+                <ScalarProperty Name="WorkDay_ID" ColumnName="WorkDay_ID" />
+                <ScalarProperty Name="Error_Detail" ColumnName="Error_Detail" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Bill_To" ColumnName="Bill_To" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Perentage" ColumnName="Perentage" />
+                <ScalarProperty Name="Invoice_Date" ColumnName="Invoice_Date" />
+                <ScalarProperty Name="Invoice_Number" ColumnName="Invoice_Number" />
+                <ScalarProperty Name="Processing_Time" ColumnName="Processing_Time" />
+                <ScalarProperty Name="Sender_Email" ColumnName="Sender_Email" />
+                <ScalarProperty Name="Supplier_ID" ColumnName="Supplier_ID" />
+                <ScalarProperty Name="Supplier_Name" ColumnName="Supplier_Name" />
+                <ScalarProperty Name="PO_Or_Non_PO" ColumnName="PO_Or_Non_PO" />
+                <ScalarProperty Name="File_Name" ColumnName="File_Name" />
+                <ScalarProperty Name="Log_ID" ColumnName="Log_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
